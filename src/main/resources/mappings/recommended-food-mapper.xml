@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qiancheng.om.dao.RecommendedFoodMapper">
+    <!-- 添加推荐菜品 -->
+    <insert id="insert">
+        INSERT INTO recommended_food (food_id, insert_user, update_user)
+        VALUES (#{recommendedFood.foodId}, #{recommendedFood.insertUser},
+                #{recommendedFood.updateUser});
+    </insert>
+    <!-- 批量删除 -->
+    <update id="deleteById">
+        UPDATE recommended_food SET update_user=#{updateUser},update_time=NOW(),is_deleted=1 WHERE
+        id IN
+        <foreach collection="idArr" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+    <!-- 根据id更新推荐菜品-->
+    <update id="updateById">
+        UPDATE recommended_food
+        SET weight      = #{recommendedFood.weight}, update_user = #{recommendedFood.updateUser},
+            update_time = Now()
+        WHERE id = #{recommendedFood.id};
+    </update>
+    <!-- 获取指定条数推荐菜品 -->
+    <select id="list" resultType="map">
+        SELECT
+        weight,
+        id,
+        food_id AS `foodId`,
+        insert_user AS `insertUser`,
+        insert_time AS `insertTime`
+        FROM recommended_food
+        WHERE is_deleted = FALSE
+        ORDER BY weight DESC, id DESC
+        <if test="rowsNum!=null">
+            LIMIT 0, #{rowsNum};
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        SELECT count(*)
+        FROM recommended_food
+        WHERE is_deleted = FALSE
+    </select>
+</mapper>

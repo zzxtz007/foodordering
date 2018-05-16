@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qiancheng.om.dao.FoodCategoryMapper">
+    <insert id="insert">
+        INSERT INTO food_category (name, stall_id, insert_user, update_user)
+        VALUES (#{FoodCategory.name}, #{FoodCategory.stallId}, #{FoodCategory.insertUser},
+                #{FoodCategory.updateUser})
+    </insert>
+    <update id="updateById">
+        update food_category set
+        <if test="FoodCategory.name!=null">
+            name = #{FoodCategory.name},
+        </if>
+        <if test="FoodCategory.weight!=null">
+            weight= #{FoodCategory.weight},
+        </if>
+        update_user = #{FoodCategory.updateUser},
+        update_time = current_timestamp
+        where id=#{FoodCategory.id} and is_deleted = 0
+    </update>
+    <update id="deleteById">
+        update food_category set is_deleted =1,update_time = current_timestamp,update_user =
+        #{updateUser} where id in
+        <foreach collection="idArr" separator="," item="item" open="(" close=")">
+            #{item}
+        </foreach>
+    </update>
+    <select id="listById" resultType="map">
+        SELECT
+        id,
+        name,
+        stall_id `stallId`,
+        weight
+        FROM food_category
+        <include refid="whereClause"/>
+        ORDER BY weight DESC
+    </select>
+
+    <select id="count" resultType="int">
+        SELECT count(*)
+        FROM food_category
+        <include refid="whereClause"/>
+    </select>
+
+    <sql id="whereClause">
+        WHERE is_deleted=0
+        <if test="foodCategory.stallId!=null">
+            AND stall_id=#{foodCategory.stallId}
+        </if>
+        <if test="foodCategory.id!=null">
+            AND id=#{foodCategory.id}
+        </if>
+    </sql>
+</mapper>

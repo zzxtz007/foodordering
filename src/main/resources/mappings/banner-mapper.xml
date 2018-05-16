@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qiancheng.om.dao.BannerMapper">
+    <insert id="insert">
+        INSERT INTO banner (image_url, link, insert_user, update_user) VALUES
+            (#{banner.imageUrl}, #{banner.link}, #{banner.insertUser}, #{banner.updateUser})
+    </insert>
+
+    <update id="deleteById">
+        update banner set is_deleted = 1, update_user = #{updateUser}, update_time =
+        CURRENT_TIMESTAMP where id in
+        <foreach collection="idArr" separator="," item="idArr" open="(" close=")">
+            #{idArr}
+        </foreach>
+    </update>
+
+    <update id="updateById">
+        update banner set
+        <if test="banner.imageUrl!=null">
+            image_url = #{banner.imageUrl},
+        </if>
+        <if test="banner.link != null">
+            link = #{banner.link},
+        </if>
+        <if test="banner.weight != null">
+            weight = #{banner.weight},
+        </if>
+        update_time = CURRENT_TIMESTAMP,
+        update_user = #{banner.updateUser}
+        where id = #{banner.id};
+    </update>
+
+
+    <select id="listAll" resultType="map">
+        SELECT
+            id,
+            image_url   AS `imageUrl`,
+            link,
+            insert_time AS `insertTime`
+        FROM banner
+        WHERE is_deleted = 0
+        ORDER BY weight DESC, id ASC
+    </select>
+</mapper>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qiancheng.om.dao.OrderMapper">
+
+    <insert id="insert">
+        INSERT INTO `order` (id, consumer_id, stall_id, phone, appointment_id, appointment_time, remark, is_pack, status, pay_time, refund_application_time, refund_end_time, insert_user, update_user)
+        VALUES (#{order.id}, #{order.consumerId}, #{order.stallId}, #{order.phone},
+                             #{order.appointmentId},
+                             #{order.appointmentTime}, #{order.remark}, #{order.isPack},
+                             #{order.status}, #{order.payTime},
+                             #{order.refundApplicationTime}, #{order.refundEndTime},
+                #{order.insertUser}, #{order.updateUser});
+    </insert>
+
+    <update id="updateById">
+        update `order`
+        <set>
+            <if test="order.consumerId != null">
+                consumer_id = #{order.consumerId},
+            </if>
+            <if test="order.stallId != null ">
+                stall_id = #{order.stallId},
+            </if>
+            <if test="order.phone != null">
+                phone = #{order.phone},
+            </if>
+            <if test="order.appointmentId != null">
+                appointment_id = #{order.appointmentId},
+            </if>
+            <if test="order.appointmentTime != null">
+                appointment_time = #{order.appointmentTime},
+            </if>
+            <if test="order.remark != null">
+                remark = #{order.remark},
+            </if>
+            <if test="order.isPack != null">
+                is_pack = #{order.isPack},
+            </if>
+            <if test="order.status != null">
+                status = #{order.status},
+            </if>
+            <if test="order.payTime != null">
+                order.pay_time = #{order.payTime},
+            </if>
+            <if test="order.refundApplicationTime != null">
+                refund_application_time = #{order.refundApplicationTime},
+            </if>
+            <if test="order.refundEndTime != null">
+                refund_end_time = #{order.refundEndTime},
+            </if>
+            <if test="order.updateUser != null">
+                update_user = #{order.updateUser},
+            </if>
+            <if test="1==1">
+                update_time = current_timestamp,
+            </if>
+        </set>
+        where id = #{order.id};
+    </update>
+
+    <update id="deleteById">
+        UPDATE `order`
+        SET is_deleted = TRUE,
+        update_time = current_timestamp
+        WHERE id IN
+        <foreach collection="idArr" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+
+    <sql id="whereClause">
+        <where>
+            is_deleted = FALSE
+            <if test="startDate != null">
+                and order_time > #{startDate}
+            </if>
+            <if test="endDate != null">
+                and order_time &lt; #{endDate}
+            </if>
+            <if test="consumerId != null">
+                and consumer_id = #{consumerId}
+            </if>
+            <if test="stallId != null">
+                and stall_id = #{stallId}
+            </if>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="status != null">
+                and status IN
+                <foreach collection="status" index="index" item="item" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+    </sql>
+
+    <select id="list" resultType="java.util.Map" parameterType="map">
+        SELECT
+        id,
+        consumer_id `consumerId`,
+        stall_id `stallId`,
+        phone,
+        appointment_id `appointmentId`,
+        appointment_time `appointmentTime`,
+        remark,
+        is_pack `isPack`,
+        status,
+        order_time `orderTime`,
+        pay_time `payTime`,
+        refund_application_time `refundApplicationTime`,
+        refund_end_time `refundEndTime`,
+        insert_user `insertUser`
+        FROM `order`
+        <include refid="whereClause"/>
+        ORDER BY order_time DESC
+        <if test="startIndex != null and count != null">
+            LIMIT #{startIndex} , #{count}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        SELECT count(*)
+        FROM `order`
+        <include refid="whereClause"/>
+    </select>
+</mapper>

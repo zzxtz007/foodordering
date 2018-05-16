@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>菜品选择</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="css/mui.min.css">
+		<style>
+			.mui-row.mui-fullscreen>[class*="mui-col-"] {
+				height: 100%;
+			}
+			.mui-col-xs-3,
+			.mui-control-content {
+				overflow-y: auto;
+				height: 100%;
+			}
+			.mui-segmented-control .mui-control-item {
+				line-height: 50px;
+				width: 100%;
+			}
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+				background-color: #fff;
+			}
+			
+			.mui-table-view-cell>.mui-btn, .mui-table-view-cell>.mui-switch, .mui-table-view-cell>a>.mui-badge, .mui-table-view-cell>a>.mui-btn, .mui-table-view-cell>a>.mui-switch {
+			    position:;
+			    top: 50%;
+			    right: ;
+			    -webkit-transform: translateY(50%);
+			    transform: translateY(50%);
+			}
+
+		#title{
+			height: 110px;
+			width: 100%;
+			background-color:white;
+			border: 1px solid white;
+		}
+		#logo{
+			height: 100px;
+			width: 33%;
+			background-image: url(images/timg.jpg);
+			background-repeat: no-repeat;
+			border: 1px solid white;
+			margin-top: 5px;
+			margin-left: 3px;
+			float: left;
+		}
+		#logo p{
+			margin-left: 18px;
+			margin-top: 20px;
+			color: #81d8cf;
+			font-weight: bold;
+			font-size: 18px;
+		}
+		#js{
+			height: 100px;
+			width: 67%;
+			border: 1px solid white;
+		}
+		.t1{
+			margin-top: 10px;
+			width: 400px;
+			font-size: 14px;
+			color: black;
+			margin-left: 20px;
+		}
+		.t2{
+			margin-top: 20px;
+			width: 400px;
+			font-size: 14px;
+			color: black;
+			margin-left: 20px;
+		}
+		#foot{
+			position: relative;
+			}
+		#car{
+			height: 60px;
+			background-color: white;
+			width:60px;
+			border-radius:50%; 
+			border: 1px solid white;
+			position: absolute;
+			left: 5px;
+			top: 0px;
+		}
+		
+		#car img{
+			margin-left: 5px;
+			margin-top: 6px;
+			}
+		.my{
+			height: 60px;
+			width: 30px;
+			position: absolute;
+			left: 80px;
+			top: 2px;
+			
+		}
+		.my p{
+			font-size: 20px;
+			margin-top: 20px;
+			color: black;
+		}
+		#jiesuan{
+			position: absolute;
+			left: 230px;
+			top: 0px;
+			width: 150px;
+			height: 60px;
+			background-color: white;
+		}
+		.p0{
+			font-size: 20px;
+			margin-top: 20px;
+			margin-left: 40px;
+			color: black;
+		}
+		.mui-popover {
+			height: 50%;
+			width: 100%;
+		}
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav" style="background-color: #393a3f">
+			<a href="#" class="mui-action-back mui-icon mui-pull-right">
+				<img src="images/Ellipsis.png" />
+			</a>
+			<a href="#" class="mui-action-back mui-icon mui-pull-left">
+				<img src="images/Return.png" />
+			</a>
+			<h1 class="mui-title" style="color: #81ced9;">
+			晨风早餐</span>
+			</h1>
+	</header>
+		<div class="mui-content mui-row mui-fullscreen">
+			<div id="title">
+				<div id="logo">
+					<p>晨</p>
+					<p>风</p>
+				</div>
+				<div id="js">
+					<p class="t2">商家介绍商家介绍<br/>商家介绍商家介绍商家介绍商家</p>
+					<p class="t1">商家电话：18923789293</p>
+				</div>
+			</div>
+			<div class="mui-col-xs-3">
+				<div id="segmentedControls" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-vertical">
+				</div>
+			</div>
+			<div id="segmentedControlContents" class="mui-col-xs-9" style="border-left: 1px solid #c8c7cc;">
+				<div id="item1" class="mui-control-content mui-active">
+				</div>
+				<div id="item2" class="mui-control-content">
+				</div>
+				<div id="item3" class="mui-control-content">
+				</div>
+			</div>
+		</div>
+		<nav class="mui-bar mui-bar-tab" style="background-color:#81d8cf;border-top:solid 1px #09a9a5;height: 60px;">
+			<div id="foot">
+				<div id="car"><a href="#middlePopover"><div style="height: 50px;width: 50px;"><img src="images/u542.png"/></div></a></div>
+				<div class="my"><p>￥48</p></div>
+				<div id="jiesuan"><p class="p0">结算</p></div>
+			</div>
+			
+		</nav>
+		
+		<div id="middlePopover" class="mui-popover">
+			<div class="mui-popover-arrow"></div>
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell">
+							所选菜品
+						</li>
+						<li class="mui-table-view-cell">
+							<p style="font-size: 17px;">
+								<span clss="img"><img class="mui-media-object mui-pull-left" src="images/hanbao.png"></span>
+								<span class="name" style="line-height: 40px;">牛肉汉堡</span>
+								<span class="price">￥3.00</span>
+								<span style="margin-left: 10%;" class="cut"><img src="images/jian.png" width="25px"</span>
+								<span class="num">1</span>
+								<span class="add"><img src="images/add.png" width="25px"</span>
+							</p>
+						</li>
+						<li class="mui-table-view-cell">
+							<p style="font-size: 17px;">
+								<span clss="img"><img class="mui-media-object mui-pull-left" src="images/hanbao.png"></span>
+								<span class="name" style="line-height: 40px;">牛肉汉堡</span>
+								<span class="price">￥3.00</span>
+								<span style="margin-left: 10%;" class="cut"><img src="images/jian.png" width="25px"</span>
+								<span class="num">1</span>
+								<span class="add"><img src="images/add.png" width="25px"</span>
+							</p>
+						</li>
+						<li class="mui-table-view-cell">
+							<p style="font-size: 17px;">
+								<span clss="img"><img class="mui-media-object mui-pull-left" src="images/hanbao.png"></span>
+								<span class="name" style="line-height: 40px;">牛肉汉堡</span>
+								<span class="price">￥3.00</span>
+								<span style="margin-left: 10%;" class="cut"><img src="images/jian.png" width="25px"</span>
+								<span class="num">1</span>
+								<span class="add"><img src="images/add.png" width="25px"</span>
+							</p>
+						</li>
+						<li class="mui-table-view-cell">
+							<p style="font-size: 17px;">
+								<span clss="img"><img class="mui-media-object mui-pull-left" src="images/hanbao.png"></span>
+								<span class="name" style="line-height: 40px;">牛肉汉堡</span>
+								<span class="price">￥3.00</span>
+								<span style="margin-left: 10%;" class="cut"><img src="images/jian.png" width="25px"</span>
+								<span class="num">1</span>
+								<span class="add"><img src="images/add.png" width="25px"</span>
+							</p>
+						</li>
+						<li class="mui-table-view-cell">
+							<p style="font-size: 17px;">
+								<span clss="img"><img class="mui-media-object mui-pull-left" src="images/hanbao.png"></span>
+								<span class="name" style="line-height: 40px;">牛肉汉堡</span>
+								<span class="price">￥3.00</span>
+								<span style="margin-left: 10%;" class="cut"><img src="images/jian.png" width="25px"</span>
+								<span class="num">1</span>
+								<span class="add"><img src="images/add.png" width="25px"</span>
+							</p>
+						</li>
+						<li class="mui-table-view-cell">
+							<p style="font-size: 17px;">
+								<span clss="img"><img class="mui-media-object mui-pull-left" src="images/hanbao.png"></span>
+								<span class="name" style="line-height: 40px;">牛肉汉堡</span>
+								<span class="price">￥3.00</span>
+								<span style="margin-left: 10%;" class="cut"><img src="images/jian.png" width="25px"</span>
+								<span class="num">1</span>
+								<span class="add"><img src="images/add.png" width="25px"</span>
+							</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script>
+			mui.init({
+				swipeBack: true //启用右滑关闭功能
+			});
+			var controls = document.getElementById("segmentedControls");
+			var contents = document.getElementById("segmentedControlContents");
+			var html = [];
+			var i = 1,
+				j = 1,
+				m = 7, //左侧选项卡数量+1
+				n = 21; //每个选项卡列表数量+1
+			for (; i < m; i++) {
+				html.push('<a class="mui-control-item" href="#content' + i + '">促销产品和热卖产品</a>'
+				+'<a class="mui-control-item" href="#content' + i + '">超长菜品分类名称名类分品菜长超…</a>'
+				+'<a class="mui-control-item" href="#content' + i + '">垃圾食品</a>'
+				+'<a class="mui-control-item" href="#content' + i + '">主食</a>'
+				+'<a class="mui-control-item" href="#content' + i + '">超值套餐</a>'
+				+'<a class="mui-control-item" href="#content' + i + '">小食</a>'
+				+'<a class="mui-control-item" href="#content' + i + '">小食饮品</a>'
+				);
+			}
+			controls.innerHTML = html.join('');
+			html = [];
+			for (i = 1; i < m; i++) {
+				html.push('<div id="content' + i + '" class="mui-control-content"><ul class="mui-table-view">');
+				for (j = 1; j < n; j++) {
+					html.push('<li class="mui-table-view-cell"><p>垃圾食品</p></li>'
+					+'<li class="mui-table-view-cell">'
+					+'<a href="javascript:;">'
+					+'<img class="mui-media-object mui-pull-left" src="images/hanbao.png">'
+					+'<div class="mui-media-body">'
+					+'牛肉汉堡'
+					+'<div style="width:100%"><div style="width:50%;float:left;"><p>￥19</p></div>'
+					+'<div style="width:50%;float:left;"><img src="images/add.png" width="25px"/>&nbsp;<img src="images/jian.png" width="25px"/></div>'
+					+'</div><div style="width:100%"><button type="button" class="mui-btn mui-btn-outlined">'
+					+'下架'
+				+'</button>'
+				+'<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined">'
+					+'修改'
+				+'</button></div>'
+					+'</div>'
+					+'</a>'
+				    +'</li>'
+					);
+				}
+				html.push('</ul></div>');
+			}
+			contents.innerHTML = html.join('');
+			 //默认选中第一个
+			controls.querySelector('.mui-control-item').classList.add('mui-active');
+			contents.querySelector('.mui-control-content').classList.add('mui-active');
+		</script>
+
+	</body>
+
+</html>

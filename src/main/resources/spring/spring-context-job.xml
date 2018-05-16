@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+    http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.0.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+    http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.0.xsd">
+
+
+    <!-- 加载配置属性文件 -->
+    <context:property-placeholder ignore-unresolvable="true"
+                                  location="classpath:order_meal.properties"/>
+
+    <task:annotation-driven/> <!-- 定时器开关-->
+    <!-- 店铺自动开启 -->
+    <bean id="batchOpenStall" class="com.qiancheng.om.task.job.BatchOpenStall"/>
+    <!-- 店铺自动关闭 -->
+    <bean id="batchCloseStall" class="com.qiancheng.om.task.job.BatchCloseStall"/>
+    <!--00点自动清零自增序列-->
+    <bean id="cleanAppointmentId" class="com.qiancheng.om.task.job.CLeanAppointmentId"/>
+    <!--00点自动重置会员价数量-->
+    <bean id="resetMemberPriceRemaining"
+          class="com.qiancheng.om.task.job.ResetMemberPriceRemaining"/>
+    <!-- 自动扫描的包名 -->
+    <context:component-scan base-package="com.qiancheng.om.task"/>
+    <task:scheduler id="taskScheduler" pool-size="100"/>
+    <task:scheduled-tasks scheduler="taskScheduler">
+        <task:scheduled ref="batchOpenStall" method="execute" cron="${job.time.batchOpenStall}"/>
+        <task:scheduled ref="batchCloseStall" method="execute" cron="${job.time.batchCloseStall}"/>
+        <task:scheduled ref="cleanAppointmentId" method="execute" cron="${job.time.Reset}"/>
+        <task:scheduled ref="resetMemberPriceRemaining" method="execute" cron="${job.time.Reset}"/>
+    </task:scheduled-tasks>
+</beans>

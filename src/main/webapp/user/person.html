@@ -1,0 +1,165 @@
+<!doctype html>  
+<html>  
+    <head>  
+        <meta charset="UTF-8">  
+        <title></title>  
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />  
+        <link href="css/mui.min.css" rel="stylesheet" />  
+        <style type="text/css">  
+            #div {  
+                width: 0px;  
+                height: 0px;  
+                background: red;  
+                position: fixed;  
+                top: 70%;  
+                left: 50%;  
+            }  
+            /*移除底部或顶部三角,需要在删除此代码*/  
+            .mui-popover .mui-popover-arrow:after {  
+                width: 0px;  
+            }
+            .mui-input-row label {
+			    font-family: 'Helvetica Neue',Helvetica,sans-serif;
+			    line-height: 1.1;
+			    float: left;
+			    width: 30%;
+			    padding: 11px 0px 11px 30px;
+			}
+			.mui-input-row label~input, .mui-input-row label~select, .mui-input-row label~textarea {
+			    float: right;
+			    width: 70%;
+			    margin-bottom: 0;
+			    padding-left: 0;
+			    border: 0;
+			}
+			#xg{
+				height: 370px;
+				background-color: white;
+			}
+			#change{
+				width: 30%;
+				height: 30px;
+				background-color: #81d8cf;
+				margin-left: 36%;
+				margin-top: 20px;
+			}
+			#change a{
+				color: white;
+				margin-left: 15%;
+				line-height: 30px;
+			}
+			.pwd{
+				margin-left: 5%;
+				font-size: 16px;
+			}
+			.title{
+				margin-left: 37%;
+				font-size: 18px;
+				color: black;
+				margin-top: 10px;
+			}
+			#save{
+				margin-left: 25%;
+				background-color: #81d8cf;
+				color: white;
+				
+			}
+			#reset{
+				margin-left: 10px;
+				background-color: lightcoral;
+				color: white;
+			}
+        </style>  
+    </head>  
+    <body>  
+        <header class="mui-bar mui-bar-nav" style="background-color: #393a3f">
+			<a href="#" class="mui-action-back mui-icon mui-pull-right">
+				<img src="images/Ellipsis.png" />
+			</a>
+			<a href="#" class="mui-action-back mui-icon mui-pull-left">
+				<img src="images/Return.png" />
+			</a>
+			<h1 class="mui-title" style="color: #81ced9;">
+			晨风早餐</span>
+			</h1>
+		</header>
+        <div style="text-align: center;margin-top: 50px;background-color: white;">  
+        	<img src="images/u1457.png" width="40%" />
+        </div>  
+        <div>
+        <form class="mui-input-group">
+				<div class="mui-input-row">
+					<label class="list-login-font">名字：</label>
+					<input type="text"  value="猪猪侠" readonly="readonly">
+				</div>
+				<div class="mui-input-row">
+					<label class="list-login-font">手机号：</label>
+					<input type="text" value="18356909569" readonly="readonly">
+				</div>
+				<div id="xg">
+					<div id="change">
+					<a id="test">修改密码</a>
+					</div>
+				</div>
+		</form>
+		</div>
+        <div id="div"></div>  
+        <div id="popover" class="mui-popover" style="height: 320px;">  
+            <div class="mui-popover-arrow"></div>  
+            <div id="tc">
+            	<div>
+            		<p class="title">修改密码</p>
+            	</div>
+            	<form id="form">
+            		<div class="mui-input-row mui-password">
+						<span class="pwd" >旧密码：</span>
+						<input type="password"  id="oldpwd" placeholder="输入旧密码" >
+					</div>
+					<div class="mui-input-row mui-password">
+						<span class="pwd">新密码：</span>
+						<input type="password" id="pwd1" placeholder="输入新密码" >
+					</div>
+					<div class="mui-input-row mui-password">
+						<span class="pwd">确认密码：</span>
+						<input type="password" id="pwd2" placeholder="再次输入密码" >
+					</div>
+					<div class="xgbtn">
+						<input type="button" id="save" value="确认" />
+						<input type="reset" id="reset" value="取消"/>
+					</div>
+            	</form>
+            </div>  
+        </div>  
+        <script src="js/mui.min.js"></script>  
+        <script type="text/javascript">  
+            mui.init()  
+            document.getElementById("test").addEventListener("tap", function() {  
+                //调用隐藏/显示弹出层  
+                mui("#popover").popover('toggle', document.getElementById("div"));  
+            });
+            //确认修改密码
+            document.getElementById("save").addEventListener("tap", function() {  
+            	var oldpwd=document.getElementById("oldpwd").value;
+            	var pwd1=document.getElementById("pwd1").value;
+            	var pwd2=document.getElementById("pwd2").value;
+            	if(!oldpwd){
+					mui.alert('输入不能为空', '提示', function() {
+					});
+            	}
+            	if(!pwd1){
+					mui.alert('输入不能为空', '提示', function() {
+					});
+            	}
+            	if(!pwd2){
+					mui.alert('输入不能为空', '提示', function() {
+					});
+            	}
+            	if(pwd1!=pwd2){
+            		mui.alert('两次输入的密码不一样，请重新输入', '提示', function() {
+					});
+            	}
+            	
+            });
+        </script>  
+    </body>  
+</html>  

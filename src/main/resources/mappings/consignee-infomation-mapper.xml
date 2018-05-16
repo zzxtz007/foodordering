@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD  Mapper 3.0/EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qiancheng.om.dao.ConsigneeInformationMapper">
+    <insert id="insert">
+        INSERT INTO consignee_information (consumer_id, address, empty1, empty2)
+        VALUES (#{consigneeInformation.consumerId}, #{consigneeInformation.address},
+                #{consigneeInformation.empty1}, #{consigneeInformation.empty2});
+    </insert>
+
+    <sql id="selectCondition">
+        <where>
+            <if test="consigneeInformation.id != null">
+                id = #{consigneeInformation.id}
+            </if>
+            <if test="consigneeInformation.consumerId != null">
+                AND id = #{consigneeInformation.consumerId}
+            </if>
+            <if test="consigneeInformation.address != null">
+                AND id = #{consigneeInformation.address}
+            </if>
+            <if test="consigneeInformation.empty1 != null">
+                AND id = #{consigneeInformation.empty1}
+            </if>
+            <if test="consigneeInformation.id != null">
+                AND id = #{consigneeInformation.empty2}
+            </if>
+        </where>
+    </sql>
+
+    <sql id="updateCondition">
+        <set>
+            <if test="consigneeInformation.id != null">
+                id = #{consigneeInformation.id},
+            </if>
+            <if test="consigneeInformation.consumerId != null">
+                consumerId = #{consigneeInformation.consumerId},
+            </if>
+            <if test="consigneeInformation.address != null">
+                address = #{consigneeInformation.address},
+            </if>
+            <if test="consigneeInformation.empty1 != null">
+                empty1 = #{consigneeInformation.empty1},
+            </if>
+            <if test="consigneeInformation.id != null">
+                empty2 = #{consigneeInformation.empty2}
+            </if>
+        </set>
+    </sql>
+
+    <update id="updateById">
+        update consignee_information
+        <include refid="updateCondition"/>
+        where id = #{consigneeInformation.id} AND is_deleted = 0;
+    </update>
+
+    <update id="delete">
+        update consignee_information
+        SET is_deleted = 1
+        <include refid="selectCondition"/>
+    </update>
+
+    <select id="select" resultType="map">
+        select id, consumer_id consumerId, address, empty1, empty2
+        from consignee_information
+        <include refid="selectCondition"/>
+    </select>
+</mapper>

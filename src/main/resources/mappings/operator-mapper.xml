@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qiancheng.om.dao.OperatorMapper">
+    <insert id="insert">
+        INSERT INTO operator (username, salt, pwd_hash, insert_user, update_user)
+        VALUES (#{operator.username}, #{operator.salt}, #{operator.pwdHash}, #{operator.insertUser},
+                #{operator.updateUser})
+    </insert>
+    <select id="get" resultType="map">
+        SELECT
+            id,
+            username,
+            salt,
+            pwd_hash    `pwdHash`,
+            role,
+            insert_user `insertUser`,
+            insert_time `insertTime`,
+            update_user `updateUser`,
+            update_time `updateTime`,
+            is_deleted  `isDelete`
+        FROM operator
+        WHERE username = #{username}
+    </select>
+    <update id="updateById">
+        UPDATE operator SET
+        <if test="operator.username!=null">
+            username=#{operator.username},
+        </if>
+        <if test="operator.salt!=null">
+            salt=#{operator.salt},
+        </if>
+        <if test="operator.pwdHash!=null">
+            pwd_hash=#{operator.pwdHash},
+        </if>
+        <if test="operator.updateUser!=null">
+            update_user=#{operator.updateUser},
+        </if>
+        update_time=CURRENT_TIMESTAMP
+        WHERE id=#{operator.id}
+    </update>
+    <update id="deleteById">
+        UPDATE operator set is_deleted=1,update_user=#{updateUser},update_time=CURRENT_TIMESTAMP
+        WHERE id in
+        <foreach collection="idArr" separator="," item="item" open="(" close=")">
+            #{item}
+        </foreach>
+    </update>
+</mapper>

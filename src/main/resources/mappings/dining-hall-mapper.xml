@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qiancheng.om.dao.DiningHallMapper">
+
+    <insert id="insert">
+        INSERT INTO dining_hall (name, image_url, start_time, end_time, introduction, insert_user, update_user)
+        VALUES (#{diningHall.name}, #{diningHall.imageUrl}, #{diningHall.startTime},
+                #{diningHall.endTime}, #{diningHall.introduction}, #{diningHall.insertUser},
+                #{diningHall.updateUser})
+    </insert>
+
+    <update id="deleteById">
+        UPDATE dining_hall set is_deleted=1,update_user=#{updateUser},update_time =
+        CURRENT_TIMESTAMP where id IN
+        <foreach collection="idArr" separator="," item="item" open="(" close=")">
+            #{item}
+        </foreach>
+
+    </update>
+
+    <update id="updateById">
+        update dining_hall set
+        <if test="diningHall.name!=null">
+            name=#{diningHall.name},
+        </if>
+        <if test="diningHall.imageUrl != null">
+            image_url = #{diningHall.imageUrl},
+        </if>
+        <if test="diningHall.startTime!=null">
+            start_time=#{diningHall.startTime},
+        </if>
+        <if test="diningHall.endTime!=null">
+            end_time=#{diningHall.endTime},
+        </if>
+        <if test="diningHall.introduction!=null">
+            introduction=#{diningHall.introduction},
+        </if>
+        <if test="diningHall.weight != null">
+            weight = #{diningHall.weight},
+        </if>
+        <if test="diningHall.updateUser!=null">
+            update_user=#{diningHall.updateUser},
+        </if>
+        update_time = CURRENT_TIMESTAMP
+        where id=#{diningHall.id} AND is_deleted = 0
+    </update>
+
+    <select id="list" resultType="map">
+        SELECT
+        id,
+        name,
+        image_url `imageUrl`,
+        start_time `startTime`,
+        end_time `endTime`,
+        introduction,
+        weight,
+        insert_user `insertUser`,
+        insert_time `insertTime`,
+        update_user `updateUser`,
+        update_time `updateTime`,
+        is_deleted `isDeleted`
+        FROM dining_hall
+        <include refid="whereClause"/>
+        ORDER BY weight DESC
+    </select>
+
+    <select id="count" resultType="int">
+        SELECT count(*)
+        FROM dining_hall
+        <include refid="whereClause"/>
+    </select>
+
+    <sql id="whereClause">
+        WHERE is_deleted=0
+        <if test="diningHall.id!=null">
+            and id=#{diningHall.id}
+        </if>
+        <if test="diningHall.name!=null">
+            and name=#{diningHall.name}
+        </if>
+        <if test="diningHall.startTime!=null">
+            and start_time=#{diningHall.startTime}
+        </if>
+        <if test="diningHall.endTime!=null">
+            and end_time=#{diningHall.endTime}
+        </if>
+        <if test="diningHall.weight!=null">
+            and weight=#{weight}
+        </if>
+        <if test="diningHall.insertUser!=null">
+            and insert_user=#{diningHall.insertUser}
+        </if>
+        <if test="diningHall.insertTime!=null">
+            and insert_user=#{diningHall.insertTime}
+        </if>
+        <if test="diningHall.updateUser!=null">
+            and update_user=#{diningHall.updateUser}
+        </if>
+    </sql>
+
+    <select id="selectById" resultType="map">
+        SELECT
+            id,
+            name,
+            image_url   `imageUrl`,
+            start_time  `startTime`,
+            end_time    `endTime`,
+            introduction,
+            weight,
+            insert_user `insertUser`,
+            insert_time `insertTime`,
+            update_user `updateUser`,
+            update_time `updateTime`,
+            is_deleted  `isDeleted`
+        FROM dining_hall
+        WHERE id = #{diningHall.id}
+        ORDER BY weight DESC
+    </select>
+</mapper>

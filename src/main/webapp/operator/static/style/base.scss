@@ -1,0 +1,12 @@
+html, body {
+  height: 100%;
+  width: 100%;
+  min-width: 768px;
+  overflow: hidden;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}

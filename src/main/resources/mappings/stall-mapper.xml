@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qiancheng.om.dao.StallMapper">
+    <insert id="insert">
+        INSERT INTO stall (id, dining_hall_id, name, phone, image_url, username, salt, pwd_hash, insert_user, update_user)
+        VALUES
+            (#{stall.id}, #{stall.diningHallId}, #{stall.name}, #{stall.phone}, #{stall.imageUrl},
+             #{stall.username}, #{stall.salt}, #{stall.pwdHash}, #{stall.insertUser},
+             #{stall.updateUser});
+    </insert>
+
+    <update id="deleteById">
+        update stall set is_deleted = 1, update_time = CURRENT_TIMESTAMP,update_user =
+        #{updateUser} where id in
+        <foreach collection="idArr" separator="," item="item" open="(" close=")">
+            #{item}
+        </foreach>
+    </update>
+
+    <update id="update">
+        UPDATE stall
+        SET
+        <if test="stall.diningHallId!=null">
+            dining_hall_id = #{stall.diningHallId},
+        </if>
+        <if test="stall.role != null">
+            role = #{stall.role},
+        </if>
+        <if test="stall.name != null">
+            name = #{stall.name},
+        </if>
+        <if test="stall.phone != null">
+            phone = #{stall.phone},
+        </if>
+        <if test="stall.imageUrl != null">
+            image_url = #{stall.imageUrl},
+        </if>
+        <if test="stall.introduction != null">
+            introduction = #{stall.introduction},
+        </if>
+        <if test="stall.isOpen != null">
+            is_open = #{stall.isOpen},
+        </if>
+        <if test="stall.weight != null">
+            weight = #{stall.weight},
+        </if>
+        <if test="stall.username != null">
+            username = #{stall.username},
+        </if>
+        <if test="stall.salt != null">
+            salt = #{stall.salt},
+        </if>
+        <if test="stall.pwdHash != null">
+            pwd_hash = #{stall.pwdHash},
+        </if>
+        <if test="stall.insertUser != null">
+            insert_user = #{stall.insertUser},
+        </if>
+        <if test="stall.insertTime != null">
+            insert_time = #{stall.insertTime},
+        </if>
+        <if test="stall.updateUser != null">
+            update_user = #{stall.updateUser},
+        </if>
+        update_time = CURRENT_TIMESTAMP
+        <where>
+            is_deleted = FALSE
+            <if test="stall.id != null">
+                AND id = #{stall.id}
+            </if>
+        </where>
+    </update>
+
+    <sql id="whereClause">
+        <where>
+            is_deleted = FALSE
+            <if test="stall.id != null">
+                and id = #{stall.id}
+            </if>
+            <if test="stall.diningHallId!=null">
+                and dining_hall_id = #{stall.diningHallId}
+            </if>
+            <if test="stall.role != null">
+                and role = #{stall.role}
+            </if>
+            <if test="stall.name != null">
+                and name = #{stall.name}
+            </if>
+            <if test="stall.phone != null">
+                and phone = #{stall.phone}
+            </if>
+            <if test="stall.imageUrl != null">
+                and image_url = #{stall.imageUrl}
+            </if>
+            <if test="stall.isOpen != null">
+                and is_open = #{stall.isOpen}
+            </if>
+            <if test="stall.weight != null">
+                and weight = #{stall.weight}
+            </if>
+            <if test="stall.username != null">
+                and username = #{stall.username}
+            </if>
+            <if test="stall.salt != null">
+                and salt = #{stall.salt}
+            </if>
+            <if test="stall.pwdHash != null">
+                and pwd_hash = #{stall.pwdHash}
+            </if>
+            <if test="stall.insertUser != null">
+                and insert_user = #{stall.insertUser}
+            </if>
+            <if test="stall.insertTime != null">
+                and insert_time = #{stall.insertTime}
+            </if>
+            <if test="stall.updateUser != null">
+                and update_user = #{stall.updateUser}
+            </if>
+            <if test="stall.updateTime != null">
+                and update_time = #{stall.updateTime}
+            </if>
+        </where>
+    </sql>
+
+    <select id="list" resultType="map">
+        SELECT
+        id,
+        dining_hall_id `diningHallId`,
+        role,
+        name,
+        phone,
+        image_url `imageUrl`,
+        introduction,
+        is_open `isOpen`,
+        weight,
+        username,
+        salt,
+        pwd_hash `pwdHash`,
+        insert_user `insertUser`,
+        insert_time `insertTime`,
+        update_user `updateUser`,
+        update_time `updateTime`,
+        is_deleted `isDeleted`
+        FROM stall
+        <include refid="whereClause"/>
+        ORDER BY weight DESC
+    </select>
+
+    <select id="count" resultType="int">
+        SELECT count(*)
+        FROM stall
+        <include refid="whereClause"/>
+    </select>
+</mapper>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qiancheng.om.dao.GlobalNoticeMapper">
+    <!--添加全局通知 -->
+    <insert id="insert">
+        INSERT INTO global_notice (content, insert_user, update_user)
+        VALUES (#{globalNotice.content}, #{globalNotice.insertUser}, #{globalNotice.updateUser});
+    </insert>
+    <!--获取第一条全局通知-->
+    <select id="list" resultType="map">
+        SELECT content
+        FROM global_notice
+        WHERE is_deleted = 0
+        ORDER BY update_time DESC
+        LIMIT 0, 1;
+    </select>
+    <!--删除全局通知-->
+    <update id="deleteById">
+        update global_notice SET update_user=#{updateUser},update_time=NOW(),is_deleted=1 WHERE id
+        IN
+        <foreach collection="idArr" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+    <!--根据全局通知更新-->
+    <update id="updateById">
+        UPDATE global_notice
+        SET content     = #{globalNotice.content}, update_user = #{globalNotice.updateUser},
+            update_time = CURRENT_TIMESTAMP
+        WHERE id = #{globalNotice.id};
+    </update>
+</mapper>

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qiancheng.om.dao.FoodMapper">
+
+    <sql id="whereClause">
+        <where>
+            <if test="food.isDeleted != null">
+                is_deleted = #{food.isDeleted}
+            </if>
+            <if test="food.id != null">
+                AND id = #{food.id}
+            </if>
+            <if test="food.categoryId != null">
+                AND category_id = #{food.categoryId}
+            </if>
+        </where>
+    </sql>
+
+    <!--根据条件查询-->
+    <select id="list" resultType="map">
+        SELECT
+        id,
+        name,
+        category_id `categoryId`,
+        image_url `imageUrl`,
+        is_on_sale `isOnSale`,
+        introduction,
+        member_price `memberPrice`,
+        member_price_cost `memberPriceCost`,
+        member_price_limit `memberPriceLimit`,
+        member_price_remaining `memberPriceRemaining`,
+        standard_price `standardPrice`,
+        pack_fee `packFee`,
+        sale_count `saleCount`,
+        weight
+        FROM
+        food
+        <include refid="whereClause"/>
+        ORDER BY weight DESC
+        <if test="startIndex != null and rowCount != null">
+            LIMIT #{startIndex}, #{rowCount}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        SELECT count(*)
+        FROM food
+        <include refid="whereClause"/>
+    </select>
+
+    <!--添加-->
+    <insert id="insert">
+        INSERT INTO food (name, image_url, introduction, category_id, standard_price, member_price
+            , member_price_cost, member_price_limit, sale_count, insert_user, update_user, pack_fee)
+        VALUES (#{food.name}, #{food.imageUrl}, #{food.introduction}, #{food.categoryId},
+                              #{food.standardPrice}, #{food.memberPrice}, #{food.memberPriceCost},
+                              #{food.memberPriceLimit}, #{food.saleCount}, #{food.insertUser},
+                              #{food.updateUser}, #{food.packFee});
+    </insert>
+
+    <!--删除-->
+    <update id="deleteById">
+        UPDATE food
+        SET food.is_deleted = 1,
+        food.update_time = current_timestamp,
+        food.update_user = #{updateUser}
+        WHERE food.id IN
+        <foreach collection="idArr" item="idArr" open="(" close=")" separator=",">
+            #{idArr}
+        </foreach>
+    </update>
+
+    <!--修改-->
+    <update id="updateById">
+        UPDATE food
+        <set>
+            <if test="food.name != null">
+                food.name = #{food.name},
+            </if>
+            <if test="food.imageUrl != null">
+                food.image_url = #{food.imageUrl},
+            </if>
+            <if test="food.categoryId != null">
+                food.category_id = #{food.categoryId},
+            </if>
+            <if test="food.introduction != null">
+                food.introduction = #{food.introduction},
+            </if>
+            <if test="food.IsOnSale != null">
+                food.is_on_sale = #{food.isOnSale},
+            </if>
+            <if test="food.packFee != null">
+                food.pack_fee = #{food.packFee},
+            </if>
+            <if test="food.standardPrice != null">
+                food.standard_price = #{food.standardPrice},
+            </if>
+            <choose>
+                <when test="food.memberPrice == -1">
+                    food.member_price = NULL,
+                </when>
+                <when test="food.memberPrice != null">
+                    food.member_price = #{food.memberPrice},
+                </when>
+            </choose>
+            <choose>
+                <when test="food.memberPriceCost == -1">
+                    food.member_price_cost = NULL,
+                </when>
+                <when test="food.memberPriceCost != null">
+                    food.member_price_cost = #{food.memberPriceCost},
+                </when>
+            </choose>
+            <choose>
+                <when test="food.memberPriceLimit == -1">
+                    food.member_price_limit = NULL,
+                </when>
+                <when test="food.memberPriceLimit != null">
+                    food.member_price_limit = #{food.memberPriceLimit},
+                </when>
+            </choose>
+            <choose>
+                <when test="food.memberPriceRemaining == -1">
+                    food.member_price_remaining = NULL,
+                </when>
+                <when test="food.memberPriceRemaining != null">
+                    food.member_price_remaining = #{food.memberPriceRemaining},
+                </when>
+            </choose>
+            <if test="food.saleCount != null">
+                food.sale_count = #{food.saleCount},
+            </if>
+            <if test="food.weight != null">
+                food.weight = #{food.weight},
+            </if>
+            <if test="food.updateUser != null">
+                food.update_user = #{food.updateUser},
+            </if>
+            <if test="1==1">
+                food.update_time = CURRENT_TIMESTAMP
+            </if>
+        </set>
+        WHERE food.id = #{food.id} AND food.is_deleted = 0
+    </update>
+</mapper>

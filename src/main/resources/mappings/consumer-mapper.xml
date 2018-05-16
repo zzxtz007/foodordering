@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD  Mapper 3.0/EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qiancheng.om.dao.ConsumerMapper">
+    <insert id="insert">
+        INSERT INTO consumer (id)
+        VALUES (#{consumer.id})
+    </insert>
+    <update id="updateById">
+        UPDATE consumer SET
+        <if test="consumer.member!=null">
+            is_member=1,
+        </if>
+        <if test="consumer.name!=null">
+            name = #{consumer.name},
+        </if>
+        <if test="consumer.studentId!=null">
+            student_id = #{consumer.studentId},
+        </if>
+        <if test="consumer.phone!=null">
+            phone = #{consumer.phone},
+        </if>
+        update_time = current_timestamp
+        where id=#{consumer.id} and is_deleted = 0
+    </update>
+    <update id="deleteById">
+        UPDATE consumer SET is_deleted=1, update_time=CURRENT_TIMESTAMP WHERE id IN
+        <foreach collection="idArr" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+    <select id="list" resultType="map">
+        SELECT
+            id,
+            is_member  `isMember`,
+            phone,
+            name,
+            student_id `studentId`
+        FROM consumer
+        WHERE id = #{consumer.id} AND is_deleted = 0
+    </select>
+</mapper>

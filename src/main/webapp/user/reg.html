@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>注册</title>
+		<script src="js/mui.min.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+
+		<style type="text/css">
+			body {
+				background-color: #fff;
+			}
+			.mui-input-group:after {
+				height: 1px;
+				background-color: #fff;
+			}
+			
+			.mui-input-group:before {
+				height: 1px;
+				background-color: #fff;
+			}
+			.mui-input-group .mui-input-row:after {
+			    position: absolute;
+			    right: 30px;
+			    bottom: 0;
+			    left: 0px;
+			    height: 1px;
+			    content: '';
+			    -webkit-transform: scaleY(.5);
+			    transform: scaleY(.5);
+			    background-color: #81d8cf; 
+			    width: 100%;
+			}
+			 .mui-input-row:after {
+			    /* position: absolute; */
+			    right: 0;
+			    bottom: 0;
+			    left: px;
+			    height: 1px;
+			    content: '';
+			    -webkit-transform: scaleY(.5);
+			    transform: scaleY(.5);
+			    background-color: #fff;
+			}
+				.mui-bar {
+			    background-color: #fff;
+			    box-shadow: 0 0 0px rgba(0,0,0,.85);
+			}
+				.mui-btn-danger, .mui-btn-negative, .mui-btn-red {
+			    color: #fff;
+			    border: 1px solid #81d8cf;
+			    background-color: #81d8cf;
+			}
+			.mui-input-row label {
+			    font-family: 'Helvetica Neue',Helvetica,sans-serif;
+			    line-height: 1.1;
+			    float: left;
+			    width: 30%;
+			    padding: 11px 0px 11px 30px;
+			}
+			.mui-input-row label~input, .mui-input-row label~select, .mui-input-row label~textarea {
+			    float: right;
+			    width: 70%;
+			    margin-bottom: 0;
+			    padding-left: 0;
+			    border: 0;
+			}
+			.list-login-font {
+				font-size: 14px;
+			}
+			
+			.login-button-height {
+				line-height: 40px;
+			}
+			
+			.login-button {
+				margin-top: 40px;
+				width: 60%;
+			}
+			.yqm-zt {
+				position: absolute;
+				left: auto;
+				bottom:5px;
+				right: 10px;
+				width: 79px;
+				height: 30px;
+				margin: 0;
+				padding: 5px;
+				color: #c6011f;
+				font-size: 14px;
+			}
+			.yqm > .mui-input-row:after{height: 0px;}
+			}
+		</style>
+	</head>
+
+<body>
+	<header class="mui-bar mui-bar-nav" style="background-color: #393a3f">
+			<a href="#" class="mui-action-back mui-icon mui-pull-right">
+				<img src="images/Ellipsis.png" />
+			</a>
+			<a href="#" class="mui-action-back mui-icon mui-pull-left">
+				<img src="images/Return.png" />
+			</a>
+			<h1 class="mui-title" style="color: #81ced9;">
+			晨风早餐</span>
+			</h1>
+		</header>
+	<div style="text-align: center;">
+			<img src="images/login-bg.png" width="100%" />
+	</div>
+	<div>
+        <form class="mui-input-group">
+				<div class="mui-input-row">
+					<label class="list-login-font">手机号：</label>
+					<input type="text" placeholder="输入手机号">
+				</div>
+				<div class="mui-input-row">
+					<label class="list-login-font">用户名：</label>
+					<input type="text" placeholder="输入用户名">
+				</div>
+				<div class="mui-input-row mui-password">
+					<label><span class="list-login-font">密码：</span></label>
+					<input type="password" placeholder="输入密码" class="mui-input-password">
+				</div>
+				<div class="mui-input-row mui-password">
+					<label><span class="list-login-font">确认密码：</span></label>
+					<input type="password" placeholder="再次输入密码" class="mui-input-password">
+				</div>
+				<div class="mui-button-row login-button-height">
+					<button class="mui-btn mui-btn-danger login-button" type="button" onclick="return false;">注册</button>
+				</div>
+		</form>
+		</div>
+	</body>
+
+</html>

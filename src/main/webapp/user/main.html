@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>主页面</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" href="css/app.css" />
+		<style>
+			.cc{
+				position: relative;
+			}
+			#logo{
+				width: 105px;
+				height: 105px;
+				border-radius: 50%;
+				background-image: url(images/timg.jpg);
+				background-repeat: no-repeat;
+				border: 1px solid white;
+				margin-left: 37%;
+				margin-bottom: 10px;
+			}
+			#logo p{
+				margin-top: 20px;
+				margin-left: 20px;
+				color: #81d8cf;
+				font-weight: bold;
+				font-size: 18px;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav" style="background-color: #393a3f">
+			<a href="#" class="mui-action-back mui-icon mui-pull-right">
+				<img src="images/Ellipsis.png" />
+			</a>
+			<a href="#" class="mui-action-back mui-icon mui-pull-left">
+				<img src="images/Return.png" />
+			</a>
+			<h1 class="mui-title" style="color: #81ced9;">
+			晨风早餐</span>
+			</h1>
+	</header>
+	<div class="mui-content" style="padding-top: 50px;">
+		 <div class="mui-content-padded">
+		 	<div class="cc">
+		 		<div id="logo">
+		 			<p>晨</p>
+					<p>风</p>
+		 		</div>
+		 		<div class="btn">
+		        <button type="button" class="mui-btn mui-btn-primary mui-btn-block" id="select">我要点餐</button>
+		        <button type="button" class="mui-btn mui-btn-success mui-btn-block" id="person">个人中心</button>
+		 		</div>
+		 	</div>
+		</div>
+	</div>
+	</body>
+	<script src="js/mui.min.js"></script>
+	<script>
+		mui.init();
+		document.getElementById('select').addEventListener('tap',function(){
+			mui.openWindow({
+				url:'selectFood.html',
+				});
+		});
+		document.getElementById('person').addEventListener('tap',function(){
+			mui.openWindow({
+				url:'person.html',
+				});
+		});
+		
+	</script>
+</html>
