@@ -19,10 +19,11 @@ public interface ConsumerService {
      * @param uid       用户ID
      * @param name      用户姓名
      * @param studentId 用户学生证号
+     * @param phone     用户手机
      * @return 状态码
      * @throws Throwable 发生异常时抛出
      */
-    Response updateById(String uid, String name, String studentId) throws Throwable;
+    Response updateById(String uid, String name, String studentId, String phone) throws Throwable;
 
     /**
      * 根据id获取用户信息
