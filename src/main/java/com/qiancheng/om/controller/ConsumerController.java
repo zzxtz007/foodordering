@@ -46,18 +46,14 @@ public class ConsumerController {
     /**
      * 注册会员
      *
-     * @param uid       用户ID
      * @param name      用户姓名
      * @param studentId 用户学生证号
      * @return Json 格式的 Response
      * @throws Throwable 发生异常时抛出
      */
     @RequestMapping(value = "/membership", method = RequestMethod.POST)
-    @NeedLogin
-    @NeedRole(UserRoleEnum.CONSUMER)
-    @GetUserInfo
-    public String updateById(String name, String studentId, String uid) throws Throwable {
-        return GSON.toJson(consumerService.updateById(uid, name, studentId));
+    public String updateById(String name, String studentId) throws Throwable {
+        return GSON.toJson(consumerService.updateById("软件注册", name, studentId));
     }
 
     /**
