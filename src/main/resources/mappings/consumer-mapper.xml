@@ -37,6 +37,14 @@
             name,
             student_id `studentId`
         FROM consumer
-        WHERE id = #{consumer.id} AND is_deleted = 0
+            <where>
+                is_deleted=0
+                <if test="consumer.id !=null">
+                    and id = #{consumer.id}
+                </if>
+                <if test="consumer.studentId != null">
+                    and student_id = #{consumer.studentId}
+                </if>
+            </where>
     </select>
 </mapper>

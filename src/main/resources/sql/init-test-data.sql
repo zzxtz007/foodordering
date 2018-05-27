@@ -438,11 +438,11 @@ VALUES ('oper2', 'VhNdhH8lqoVRId2rVHddDljiKNTRieqT',
 
 -- 订单
 INSERT INTO `order` (id, consumer_id, stall_id, phone, appointment_id, appointment_time, remark, is_pack, status, pay_time, refund_application_time, refund_end_time, insert_user, update_user)
-VALUES ('00000000000000000000000000000001', 'openid_000000000000000000002', 's_4', '18614998310', 1,
+VALUES ('0000000000000000000000000000015', 'OPEN899212133378881', 's_1', '13998441126', 12,
                                             date_add(current_timestamp, INTERVAL 64 MINUTE),
-                                            '订单1的备注', TRUE, 2,
+                                            '订单15的备注', TRUE, 1,
                                             date_add(current_timestamp, INTERVAL 3 MINUTE), NULL,
-        NULL, 'openid_000000000000000000002', 'openid_000000000000000000002');
+        NULL, 'OPEN899212133378881', 'OPEN899212133378881');
 INSERT INTO `order` (id, consumer_id, stall_id, phone, appointment_id, appointment_time, remark, is_pack, status, pay_time, refund_application_time, refund_end_time, insert_user, update_user)
 VALUES ('00000000000000000000000000000002', 'openid_000000000000000000003', 's_5', '18617206895', 2,
                                             date_add(current_timestamp, INTERVAL 22 MINUTE),
