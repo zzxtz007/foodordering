@@ -112,7 +112,7 @@ public class ConsumerServiceImpl implements ConsumerService {
 			return new Response(1);
 		}
 		LOGGER.debug("方法结束，状态码为0");
-		return new Response(0).add("consumerList", consumerList);
+		return new Response(0).add("consumerList", consumerList).add("consumer",consumerList.get(0));
 	}
 
 	@Override
