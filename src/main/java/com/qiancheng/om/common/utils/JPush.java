@@ -47,31 +47,31 @@ public class JPush {
      * @param dataMap 推送消息
      */
     public static void push(String alias, Map<String, String> dataMap) {
-        JPushClient jpushClient = new JPushClient(MASTER_SECRET, APP_KEY, null, ClientConfig
-                .getInstance());
-
-        // For push, all you need do is to build PushPayload object.
-        PushPayload payload = buildPushObjectAllAliasAlert(alias, dataMap);
-
-        try {
-            PushResult result = jpushClient.sendPush(payload);
-            LOGGER.info("Got result - " + result);
-
-        } catch (APIConnectionException e) {
-            LOGGER.error("Connection error, should retry later", e);
-
-        } catch (APIRequestException e) {
-            // 忽略列表
-            switch (e.getErrorCode()) {
-                case 1011:
-                    return;
-            }
-
-            LOGGER.error("Should review the error, and fix the request", e);
-            LOGGER.info("HTTP Status: " + e.getStatus());
-            LOGGER.info("Error Code: " + e.getErrorCode());
-            LOGGER.info("Error Message: " + e.getErrorMessage());
-        }
+//        JPushClient jpushClient = new JPushClient(MASTER_SECRET, APP_KEY, null, ClientConfig
+//                .getInstance());
+//
+//        // For push, all you need do is to build PushPayload object.
+//        PushPayload payload = buildPushObjectAllAliasAlert(alias, dataMap);
+//
+//        try {
+//            PushResult result = jpushClient.sendPush(payload);
+//            LOGGER.info("Got result - " + result);
+//
+//        } catch (APIConnectionException e) {
+//            LOGGER.error("Connection error, should retry later", e);
+//
+//        } catch (APIRequestException e) {
+//            // 忽略列表
+//            switch (e.getErrorCode()) {
+//                case 1011:
+//                    return;
+//            }
+//
+//            LOGGER.error("Should review the error, and fix the request", e);
+//            LOGGER.info("HTTP Status: " + e.getStatus());
+//            LOGGER.info("Error Code: " + e.getErrorCode());
+//            LOGGER.info("Error Message: " + e.getErrorMessage());
+//        }
     }
 
 }
