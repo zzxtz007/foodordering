@@ -405,7 +405,7 @@ public class OrderServiceImpl implements OrderService {
         List<Map<String, Object>> orderArr = orderMapper.list(selectOrder);
         if (orderArr.size() == 0) {
             LOGGER.debug("订单不存在");
-            return new Response(3);aaa
+            return new Response(3);
         }
         Map<String, Object> order = orderArr.get(0);
 
