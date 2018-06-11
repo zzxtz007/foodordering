@@ -159,7 +159,7 @@ public class SessionAspect {
             return GSON.toJson(new Response(3));
         }
         try {
-            byte[] resultByte = AES.decrypt(Base64.decodeBase64(encryptedData),
+	        byte[] resultByte = AES.decrypt(Base64.decodeBase64(encryptedData),
                     Base64.decodeBase64(sessionKey),
                     Base64.decodeBase64(iv));
             if (null != resultByte && resultByte.length > 0) {
